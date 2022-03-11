@@ -39,7 +39,7 @@ export default {
 
   data() {
     return {
-      showTriangulo: false,
+      showTriangulo: true,
       showCuadrado: false,
       showCirculo: false,
     };
@@ -47,17 +47,35 @@ export default {
 
   methods: {
     toggleTriangulo() {
-      if (!this.showCuadrado && !this.showCirculo) {
+      if (this.showCuadrado || this.showCirculo) {
+        if (this.showCuadrado) {
+          this.showCuadrado = !this.showCuadrado;
+        }
+        if (this.showCirculo) {
+          this.showCirculo = !this.showCirculo;
+        }
         this.showTriangulo = !this.showTriangulo;
       }
     },
     toggleCuadrado() {
-      if (!this.showTriangulo && !this.showCirculo) {
+      if (this.showTriangulo || this.showCirculo) {
+        if (this.showTriangulo) {
+          this.showTriangulo = !this.showTriangulo;
+        }
+        if (this.showCirculo) {
+          this.showCirculo = !this.showCirculo;
+        }
         this.showCuadrado = !this.showCuadrado;
       }
     },
     toggleCirculo() {
-      if (!this.showTriangulo && !this.showCuadrado) {
+      if (this.showTriangulo || this.showCuadrado) {
+        if (this.showTriangulo) {
+          this.showTriangulo = !this.showTriangulo;
+        }
+        if (this.showCuadrado) {
+          this.showCuadrado = !this.showCuadrado;
+        }
         this.showCirculo = !this.showCirculo;
       }
     },
