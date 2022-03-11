@@ -13,7 +13,7 @@
               Acá podrás calcular las propiedades básicas de las figuras
               geométricas que prefieras.
             </b-card-text>
-            <b-button variant="primary"> Calcular </b-button>
+            <b-button variant="primary" to="/figuras"> Calcular </b-button>
           </b-card>
         </b-col>
         <b-col md="6">

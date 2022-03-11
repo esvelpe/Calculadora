@@ -7,10 +7,10 @@
           <b-nav-item @click="toggleTriangulo" exact exact-active-class="active"
             >Triángulo</b-nav-item
           >
-          <b-nav-item to="/figuras/cuadrado" exact exact-active-class="active"
+          <b-nav-item @click="toggleCuadrado" exact exact-active-class="active"
             >Cuadrado</b-nav-item
           >
-          <b-nav-item to="/figuras/circulo" exact exact-active-class="active"
+          <b-nav-item @click="toggleCirculo" exact exact-active-class="active"
             >Círculo</b-nav-item
           >
         </b-nav>
@@ -19,6 +19,8 @@
       <b-card-body>
         <b-card-text>
           <px-triangulo v-if="showTriangulo" />
+          <px-cuadrado v-if="showCuadrado"></px-cuadrado>
+          <px-circulo v-if="showCirculo"></px-circulo>
         </b-card-text>
         <!-- <router-view></router-view> -->
       </b-card-body>
@@ -28,20 +30,36 @@
 
 <script>
 import PxTriangulo from "../components/PxTriangulo.vue";
+import PxCuadrado from "../components/PxCuadrado.vue";
+import PxCirculo from "../components/PxCirculo.vue";
 
 export default {
-  components: { PxTriangulo },
+  components: { PxTriangulo, PxCuadrado, PxCirculo },
   name: "PxFiguras",
 
   data() {
     return {
       showTriangulo: false,
+      showCuadrado: false,
+      showCirculo: false,
     };
   },
 
   methods: {
     toggleTriangulo() {
-      this.showTriangulo = !this.showTriangulo;
+      if (!this.showCuadrado && !this.showCirculo) {
+        this.showTriangulo = !this.showTriangulo;
+      }
+    },
+    toggleCuadrado() {
+      if (!this.showTriangulo && !this.showCirculo) {
+        this.showCuadrado = !this.showCuadrado;
+      }
+    },
+    toggleCirculo() {
+      if (!this.showTriangulo && !this.showCuadrado) {
+        this.showCirculo = !this.showCirculo;
+      }
     },
   },
 };
