@@ -14,13 +14,25 @@
             >Círculo</b-nav-item
           >
         </b-nav>
+        <b-form-group id="input-group">
+          <b-form-checkbox-group v-model="propiedades" id="check-boxes">
+            <b-form-checkbox value="area">Área</b-form-checkbox>
+            <b-form-checkbox value="perimetro">Perímetro</b-form-checkbox>
+          </b-form-checkbox-group>
+        </b-form-group>
       </b-card-header>
 
       <b-card-body>
         <b-card-text>
-          <px-triangulo v-if="showTriangulo" />
-          <px-cuadrado v-if="showCuadrado"></px-cuadrado>
-          <px-circulo v-if="showCirculo"></px-circulo>
+          <px-triangulo v-if="showTriangulo" :propiedades="propiedades" />
+          <px-cuadrado
+            v-if="showCuadrado"
+            :propiedades="propiedades"
+          ></px-cuadrado>
+          <px-circulo
+            v-if="showCirculo"
+            :propiedades="propiedades"
+          ></px-circulo>
         </b-card-text>
         <!-- <router-view></router-view> -->
       </b-card-body>
@@ -42,6 +54,7 @@ export default {
       showTriangulo: true,
       showCuadrado: false,
       showCirculo: false,
+      propiedades: [],
     };
   },
 
@@ -86,5 +99,10 @@ export default {
 <style scoped>
 .contenedor {
   margin-top: 5%;
+}
+#input-group {
+  position: absolute;
+  bottom: 50%;
+  left: 30%;
 }
 </style>
