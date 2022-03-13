@@ -13,13 +13,15 @@
             </b-input-group>
           </b-col>
           <b-col>
-            <span
+            <span v-if="showArea || showPerimetro"
               ><strong
-                >El
-                {{ propiedades.includes("area") ? "area" : "perimetro" }} del
+                >El {{ showArea ? "area" : "perimetro" }} del triángulo
                 triángulo es:</strong
               ></span
             >
+            <span v-else>
+              Seleccione si desea calcular el área o el perímetro del triángulo
+            </span>
           </b-col>
         </b-row>
         <b-row>
@@ -33,12 +35,10 @@
             </b-input-group>
           </b-col>
           <b-col>
-            <span v-if="propiedades.includes('area')">{{
-              area.toFixed(2)
+            <span v-if="showArea">{{
+              area ? area.toFixed(2) : "Los valores que ingresó son incorrectos"
             }}</span>
-            <span v-if="propiedades.includes('perimetro')">{{
-              perimetro.toFixed(2)
-            }}</span>
+            <span v-else-if="showPerimetro">{{ perimetro.toFixed(2) }}</span>
           </b-col>
         </b-row>
         <b-row>
@@ -50,6 +50,11 @@
                 v-model="ladoC"
               ></b-form-input>
             </b-input-group>
+          </b-col>
+          <b-col>
+            <b-button to="/" pill variant="outline-primary">
+              Regresar
+            </b-button>
           </b-col>
         </b-row>
       </b-container>
@@ -67,19 +72,30 @@ export default {
     };
   },
   props: {
-    propiedades: {
-      type: Array,
-      default: () => [],
+    showArea: {
+      type: Boolean,
+      default: false,
+    },
+    showPerimetro: {
+      type: Boolean,
+      default: false,
     },
   },
 
   computed: {
     area() {
       const S =
-        (Number(this.ladoA) + Number(this.ladoB) + Number(this.ladoC)) / 2;
+        (Number(this.ladoA) + Number(this.ladoB) + Number(this.ladoC)) / 2.0;
       const radicando =
-        S * (S - this.ladoA) * (S - this.ladoB) * (S - this.ladoC);
-      return Math.sqrt(radicando);
+        S *
+        (S - Number(this.ladoA)) *
+        (S - Number(this.ladoB)) *
+        (S - Number(this.ladoC));
+      if (radicando >= 0) {
+        return Math.sqrt(radicando);
+      } else {
+        return false;
+      }
     },
     perimetro() {
       return Number(this.ladoA) + Number(this.ladoB) + Number(this.ladoC);

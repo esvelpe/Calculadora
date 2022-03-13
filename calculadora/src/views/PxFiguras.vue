@@ -28,12 +28,12 @@
               </b-nav>
             </b-col>
             <b-col>
-              <b-form-group id="input-group">
-                <b-form-checkbox-group v-model="propiedades" id="check-boxes">
-                  <b-form-checkbox value="area">Área</b-form-checkbox>
-                  <b-form-checkbox value="perimetro">Perímetro</b-form-checkbox>
-                </b-form-checkbox-group>
-              </b-form-group>
+              <b-dropdown id="drop-down" text="¿Qué quieres calcular?">
+                <b-dropdown-item @click="toggleArea"> Área </b-dropdown-item>
+                <b-dropdown-item @click="togglePerimetro">
+                  Perímetro
+                </b-dropdown-item>
+              </b-dropdown>
             </b-col>
           </b-row>
         </b-container>
@@ -41,7 +41,11 @@
 
       <b-card-body>
         <b-card-text>
-          <px-triangulo v-if="showTriangulo" :propiedades="propiedades" />
+          <px-triangulo
+            v-if="showTriangulo"
+            :showArea="showArea"
+            :showPerimetro="showPerimetro"
+          />
           <px-cuadrado
             v-if="showCuadrado"
             :propiedades="propiedades"
@@ -71,7 +75,8 @@ export default {
       showTriangulo: true,
       showCuadrado: false,
       showCirculo: false,
-      propiedades: [],
+      showArea: false,
+      showPerimetro: false,
     };
   },
 
@@ -108,6 +113,12 @@ export default {
         }
         this.showCirculo = !this.showCirculo;
       }
+    },
+    toggleArea() {
+      this.showArea = !this.showArea;
+    },
+    togglePerimetro() {
+      this.showPerimetro = !this.showPerimetro;
     },
   },
 };
